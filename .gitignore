@@ -1,0 +1,14 @@
+# claves (nunca al repositorio)
+main/secrets.h
+# generados
+build/
+managed_components/
+sdkconfig.old
+*.log
+# fotos y videos de prueba (salen personas)
+*.jpg
+*.png
+*.mkv
+*.mp4
+*.h264
+__pycache__/

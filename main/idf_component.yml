@@ -1,0 +1,8 @@
+dependencies:
+  idf: ">=6.0"
+  espressif/esp_tinyusb: "^2.0.1"
+  espressif/esp_h264: "^1.4.1"
+  espressif/led_strip: "^3.0.0"
+  espressif/human_face_detect: "*"
+  espressif/cat_detect: "*"
+  espressif/pedestrian_detect: "*"

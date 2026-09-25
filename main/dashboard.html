@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cerebro P4</title>
+<style>
+:root{--bg:#0b0f14;--card:#121922;--line:#1f2a36;--tx:#e6edf3;--mut:#8b98a5;--acc:#00d8ff;--ok:#3cff6e;--warn:#ff9a1f;--bad:#ff4d4d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.4 system-ui,Segoe UI,sans-serif}
+header{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line)}
+header h1{font-size:18px;margin:0;letter-spacing:.5px}header .dot{width:10px;height:10px;border-radius:50%;background:var(--bad)}
+header .st{color:var(--mut);font-size:13px}
+main{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(300px,1fr);gap:14px;padding:14px}
+@media(max-width:900px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.card h2{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 10px}
+#vid{width:100%;border-radius:8px;background:#000;aspect-ratio:16/9;object-fit:contain;display:block}
+.row{display:flex;justify-content:space-between;gap:8px;margin:4px 0}.row span:last-child{font-variant-numeric:tabular-nums}
+.bar{height:8px;background:#0a1016;border-radius:4px;overflow:hidden;margin:2px 0 8px}.bar i{display:block;height:100%;background:var(--acc);width:0;transition:width .4s}
+.big{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{background:#0e141b;border-radius:8px;padding:8px}.kpi small{color:var(--mut);display:block}
+label.sw{display:flex;align-items:center;gap:8px;margin:6px 0;cursor:pointer}input[type=range]{width:100%}
+select,button,.btn{background:#16212c;color:var(--tx);border:1px solid var(--line);border-radius:7px;padding:7px 11px;cursor:pointer;font:inherit;text-decoration:none;display:inline-block}
+button:hover,.btn:hover{border-color:var(--acc)}pre{background:#070a0e;border-radius:8px;padding:8px;max-height:220px;overflow:auto;font-size:11px;color:#9fb3c8;white-space:pre-wrap}
+.side{display:flex;flex-direction:column;gap:14px}.mut{color:var(--mut)}
+</style></head><body>
+<header><div class="dot" id="dot"></div><h1>CEREBRO P4</h1><div class="st" id="st">conectando…</div></header>
+<main>
+ <div class="side">
+  <div class="card"><img id="vid" alt="video en vivo"></div>
+  <div class="card"><h2>Silicio en uso (último segundo)</h2><div id="eng"></div></div>
+  <div class="card"><h2>Registro</h2><pre id="log"></pre></div>
+ </div>
+ <div class="side">
+  <div class="card"><h2>Video</h2>
+   <div class="grid3">
+    <div class="kpi"><small>entrada</small><div class="big" id="fin">–</div><small>fps del PC</small></div>
+    <div class="kpi"><small>salida</small><div class="big" id="fout">–</div><small>fps procesados</small></div>
+    <div class="kpi"><small>relleno</small><div class="big" id="ffill">–</div><small>fps de prueba</small></div>
+   </div>
+   <div class="row"><span class="mut">Webcam (UVC)</span><span id="uvc">–</span></div>
+   <div class="row"><span class="mut">Movimiento (vectores H.264)</span><span id="mot">–</span></div>
+   <div class="row"><span class="mut">Red USB</span><span id="net">–</span></div>
+  </div>
+  <div class="card"><h2>Inteligencia artificial</h2>
+   <div class="row"><span>Caras</span><span id="aif">–</span></div>
+   <div class="row"><span>Personas</span><span id="aip">–</span></div>
+   <div class="row"><span>Gatos</span><span id="aic">–</span></div>
+  </div>
+  <div class="card"><h2>Chip</h2>
+   <div class="row"><span class="mut">Temperatura</span><span id="tmp">–</span></div>
+   <div class="row"><span class="mut">Núcleo LP (primos)</span><span id="lp">–</span></div>
+   <div class="row"><span class="mut">RAM interna / PSRAM libre</span><span id="mem">–</span></div>
+   <div class="row"><span class="mut">Internet (TLS por hardware)</span><span id="inet">–</span></div>
+   <div class="row"><span class="mut">Clima</span><span id="wx">–</span></div>
+   <div class="row"><span class="mut">Indicadores</span><span id="money">–</span></div>
+  </div>
+  <div class="card"><h2>Controles</h2>
+   <p class="mut" style="margin:0 0 6px">Perfil: <button onclick="send('perfil','fluido')">Fluido</button> <button onclick="send('perfil','equilibrado')">Equilibrado</button> <button onclick="send('perfil','maximo')">Máximo silicio</button></p>
+   <label class="sw"><input type="checkbox" id="c_h264"> Grabar repetición en H.264</label>
+   <div class="row"><span>IA</span><span><select id="s_ia"><option value="0">apagada</option><option value="1">caras</option><option value="2">caras + personas</option><option value="3">caras + personas + gatos</option></select></span></div>
+   <label class="sw"><input type="checkbox" id="c_autoframe"> Auto-encuadre (te sigue la cara)</label>
+   <label class="sw"><input type="checkbox" id="c_mirror"> Espejo</label>
+   <label class="sw"><input type="checkbox" id="c_hud"> Barra de información</label>
+   <label class="sw"><input type="checkbox" id="c_boxes"> Cuadros de detección</label>
+   <label class="sw"><input type="checkbox" id="c_max"> Modo máximo (llena el silicio con cuadros de prueba)</label>
+   <div class="row"><span>Calidad JPEG</span><span id="vq"></span></div><input type="range" id="r_q" min="40" max="95">
+   <div class="row"><span>Zoom máximo</span><span id="vz"></span></div><input type="range" id="r_zoom" min="1" max="3" step="0.1">
+   <div class="row"><span>H.264 (kbps)</span><span id="vk"></span></div><input type="range" id="r_kbps" min="1000" max="20000" step="500">
+   <p><a class="btn" href="/replay.h264?s=60">⬇ Repetición (lo último grabado)</a> <a class="btn" href="/snap.jpg" target="_blank">📷 Foto</a></p>
+   <p class="mut">Firmware nuevo: <input type="file" id="fw" accept=".bin"> <button id="up">Subir</button> <span id="ups"></span></p>
+  </div>
+ </div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const names={jpeg_dec:'Decodificador JPEG',jpeg_enc:'Codificador JPEG',ppa:'PPA (gráficos 2D)',h264:'Codificador H.264',usb:'USB 2.0 (webcam)',dma2d:'2D-DMA (copias para la IA)'};
+let busy=false,cfgSeen=false;
+$('vid').src='http://'+location.hostname+':81/stream';
+function bar(label,v,color){return `<div class="row"><span>${label}</span><span>${v.toFixed(1)}%</span></div><div class="bar"><i style="width:${Math.min(100,v)}%;background:${color||'var(--acc)'}"></i></div>`}
+function col(v){return v>=95?'var(--ok)':v>=60?'var(--acc)':v>=25?'var(--warn)':'#3a4a5a'}
+async function tick(){
+ if(busy)return;busy=true;
+ try{
+  const s=await (await fetch('/api/stats',{cache:'no-store'})).json();
+  $('dot').style.background=s.pc?'var(--ok)':'var(--warn)';
+  $('st').textContent=(s.pc?'PC conectado':'esperando la cámara del PC (puente.py)')+' · encendido hace '+Math.floor(s.up/60)+' min';
+  let h=bar('CPU núcleo 0',s.cpu[0],col(s.cpu[0]))+bar('CPU núcleo 1',s.cpu[1],col(s.cpu[1]));
+  for(const k in s.eng)h+=bar(names[k]||k,s.eng[k],col(s.eng[k]));
+  $('eng').innerHTML=h;
+  $('fin').textContent=s.fps_in.toFixed(0);$('fout').textContent=s.fps_out.toFixed(0);$('ffill').textContent=s.fps_fill.toFixed(0);
+  $('uvc').textContent=s.uvc.on?`${s.uvc.fmt} ${s.uvc.w}x${s.uvc.h} (${s.uvc.sent} cuadros)`:'cerrada';
+  $('mot').textContent=s.ai.motion.toFixed(1)+'% de la imagen';
+  $('net').textContent=`↓ ${(s.net_rx_kbps/1000).toFixed(1)} Mbps · ↑ ${(s.net_tx_kbps/1000).toFixed(1)} Mbps`;
+  $('aif').textContent=`${s.ai.faces} · ${s.ai.face_fps.toFixed(1)} fps · ${s.ai.face_ms.toFixed(0)} ms`;
+  $('aip').textContent=`${s.ai.people} · ${s.ai.person_fps.toFixed(1)} fps · ${s.ai.person_ms.toFixed(0)} ms`;
+  $('aic').textContent=`${s.ai.cats} · ${s.ai.cat_fps.toFixed(1)} fps · ${s.ai.cat_ms.toFixed(0)} ms`;
+  $('tmp').textContent=s.temp.toFixed(1)+' °C';
+  $('lp').textContent=`${s.lp.primes.toLocaleString('es-CL')} (último ${s.lp.last.toLocaleString('es-CL')})`;
+  $('mem').textContent=`${(s.heap_int/1024).toFixed(0)} KB / ${(s.heap_psram/1048576).toFixed(1)} MB`;
+  $('inet').textContent=s.inet.ok?`OK · handshake ${s.inet.tls_ms} ms · ${s.inet.fetches} consultas`:'sin conexión todavía';
+  $('wx').textContent=s.inet.wx||'–';$('money').textContent=s.inet.money||'–';
+  if(!cfgSeen){cfgSeen=true;const c=s.cfg;
+   $('c_autoframe').checked=c.autoframe;$('c_mirror').checked=c.mirror;$('c_h264').checked=c.h264;$('s_ia').value=c.ia;$('c_hud').checked=c.hud;$('c_boxes').checked=c.boxes;$('c_max').checked=c.max;
+   $('r_q').value=c.q;$('r_zoom').value=c.zoom;$('r_kbps').value=c.kbps;showVals();}
+ }catch(e){$('dot').style.background='var(--bad)';$('st').textContent='sin respuesta del P4';}
+ busy=false;
+}
+async function logs(){try{const t=await (await fetch('/api/log',{cache:'no-store'})).text();const p=$('log');const end=p.scrollTop+p.clientHeight>=p.scrollHeight-4;p.textContent=t.replace(/\x1b\[[0-9;]*m/g,'');if(end)p.scrollTop=p.scrollHeight;}catch(e){}}
+function showVals(){$('vq').textContent=$('r_q').value;$('vz').textContent=(+$('r_zoom').value).toFixed(1)+'×';$('vk').textContent=$('r_kbps').value;}
+function send(k,v){fetch(`/api/cfg?${k}=${v}`,{cache:'no-store'}).then(()=>{cfgSeen=false;});}
+for(const k of ['autoframe','mirror','hud','boxes','max','h264'])$('c_'+k).onchange=e=>send(k,e.target.checked?1:0);
+$('s_ia').onchange=e=>send('ia',e.target.value);
+for(const k of ['q','zoom','kbps']){$('r_'+k).oninput=showVals;$('r_'+k).onchange=e=>send(k,e.target.value);}
+$('up').onclick=async()=>{const f=$('fw').files[0];if(!f)return;$('ups').textContent='subiendo…';
+ try{const r=await fetch('/ota',{method:'POST',body:f});$('ups').textContent=r.ok?'listo, reiniciando…':'falló';}catch(e){$('ups').textContent='reiniciando…';}};
+setInterval(tick,1000);setInterval(logs,2000);tick();logs();
+</script></body></html>
