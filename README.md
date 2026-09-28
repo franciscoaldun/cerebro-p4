@@ -4,7 +4,7 @@ Un microcontrolador de ~US$15 que recibe la cámara del PC por USB, corre **tres
 
 Placa: **Wireless-Tag WT9932P4-TINY** (módulo WT0132P4-A1, ESP32-P4 **revisión v1.0**, 16 MB flash, 32 MB PSRAM).
 
-![estado](https://img.shields.io/badge/estado-funcionando-brightgreen) ![chip](https://img.shields.io/badge/ESP32--P4-v1.0-blue) ![IDF](https://img.shields.io/badge/ESP--IDF-v6.1-red)
+![estado](https://img.shields.io/badge/estado-probado%20en%20hardware-brightgreen) ![chip](https://img.shields.io/badge/ESP32--P4-v1.0-blue) ![IDF](https://img.shields.io/badge/ESP--IDF-v6.1-red)
 
 ## Qué hace
 - **Webcam UVC** 1920×1080 en **MJPEG y H.264** (Windows la reconoce sin drivers).
@@ -70,4 +70,7 @@ PC: ◄── webcam "Camara Cerebro P4" + dashboard http://192.168.7.1
 | `main/ulp/main.c` | programa del núcleo LP |
 | `tools/puente.py` | puente del PC: cámara, internet y medición |
 
-Autor: Francisco Aldunate · 2026
+## Autor
+Desarrollado por **Francisco Aldunate** — firmware para ESP32 (P4, S3 y C3) en C con ESP-IDF, el framework oficial de Espressif.
+Portafolio: [franciscoaldunate.cl](https://franciscoaldunate.cl) · GitHub: [@franciscoaldun](https://github.com/franciscoaldun)
+
