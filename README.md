@@ -1,4 +1,8 @@
-# Cerebro P4 — webcam con IA en un ESP32-P4
+# Cerebro P4: investigación de IA en el ESP32-P4
+
+**Español** · [English](#english)
+
+**¿Cuánta inteligencia artificial cabe de verdad en un microcontrolador de US$15?** Cerebro P4 lo responde midiendo. Corre tres redes neuronales en el chip sobre video 1080p real, usa todos sus aceleradores a la vez y deja anotado dónde está el techo. El resultado útil es una webcam con IA que cualquier programa reconoce.
 
 Un microcontrolador de ~US$15 que recibe la cámara del PC por USB, corre **tres redes neuronales**, sigue tu cara, dibuja una barra con datos de internet y devuelve una **webcam 1920×1080** que cualquier programa (Cámara de Windows, Meet, OBS) puede usar. Todo por **un solo cable USB-C**.
 
@@ -69,6 +73,27 @@ PC: ◄── webcam "Camara Cerebro P4" + dashboard http://192.168.7.1
 | `main/web.c`, `main/dashboard.html` | dashboard, API y OTA |
 | `main/ulp/main.c` | programa del núcleo LP |
 | `tools/puente.py` | puente del PC: cámara, internet y medición |
+
+## English
+
+**How much AI really fits in a US$15 microcontroller?** Cerebro P4 answers by measuring. The ESP32-P4:
+
+- receives the PC's camera over USB;
+- runs **three neural networks** on the chip (faces, people and cats: ESPDet-Pico 224 with ESP-DL and the PIE vector instructions);
+- follows your face with the PPA;
+- returns a **1920×1080 UVC webcam** in MJPEG and H.264 that Windows, Meet or OBS use without drivers.
+
+All of it goes over **one USB-C cable**, which also carries a USB network with a live dashboard and the P4's own HTTPS done by its crypto hardware.
+
+**Measured findings:**
+- Fluid mode runs at 16 fps, Balanced at 8–9 and Max at 6–7, with both cores at 100 % in the last two.
+- The accelerators sit at 20–80 % because **PSRAM bandwidth (~300 MB/s) is the real ceiling**, not the NPU-style blocks.
+- Chip v1.0 limits worth knowing:
+  - the PPA scales in 16×16 blocks (~33 ms per input megapixel);
+  - neither the JPEG decoder nor PPA blending output YUV420;
+  - the H.264 encoder needs 135 KB of contiguous internal RAM.
+
+The details (in Spanish) are below.
 
 ## Autor
 Desarrollado por **Francisco Aldunate** — firmware para ESP32 (P4, S3 y C3) en C con ESP-IDF, el framework oficial de Espressif.
