@@ -12,3 +12,5 @@ sdkconfig.old
 *.mp4
 *.h264
 __pycache__/
+# excepcion: fotos del README autorizadas por el autor
+!docs/fotos/*.jpg
