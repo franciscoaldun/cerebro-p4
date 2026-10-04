@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Cerebro P4: AI research on the ESP32-P4"
+abstract: >-
+  How much AI fits in a US$15 microcontroller: the ESP32-P4 receives the PC camera over USB, runs three neural networks (faces, people, cats; ESPDet-Pico with ESP-DL and PIE), tracks the face with the PPA and returns a 1080p UVC webcam in MJPEG and H.264, plus a USB network dashboard and hardware-accelerated HTTPS. Measured finding: PSRAM bandwidth (~300 MB/s) is the ceiling, not the accelerators.
+authors:
+  - family-names: "Aldunate Rodríguez"
+    given-names: "Francisco"
+    email: "franciscoaldun@gmail.com"
+    website: "https://franciscoaldunate.cl"
+    city: "Talca"
+    country: "CL"
+repository-code: "https://github.com/franciscoaldun/cerebro-p4"
+url: "https://franciscoaldunate.cl"
+license: MIT
+version: "1.0"
+date-released: "2026-10-04"
+keywords:
+  - ESP32-P4
+  - edge AI
+  - ESP-DL
+  - UVC
+  - H.264
+  - computer vision
+  - ESP-IDF
