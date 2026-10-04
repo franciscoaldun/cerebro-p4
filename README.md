@@ -8,7 +8,7 @@ Un microcontrolador de ~US$15 que recibe la cámara del PC por USB, corre **tres
 
 Placa: **Wireless-Tag WT9932P4-TINY** (módulo WT0132P4-A1, ESP32-P4 **revisión v1.0**, 16 MB flash, 32 MB PSRAM).
 
-![estado](https://img.shields.io/badge/estado-probado%20en%20hardware-brightgreen) ![chip](https://img.shields.io/badge/ESP32--P4-v1.0-blue) ![IDF](https://img.shields.io/badge/ESP--IDF-v6.1-red)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23135955.svg)](https://doi.org/10.5281/zenodo.23135955) ![estado](https://img.shields.io/badge/estado-probado%20en%20hardware-brightgreen) ![chip](https://img.shields.io/badge/ESP32--P4-v1.0-blue) ![IDF](https://img.shields.io/badge/ESP--IDF-v6.1-red)
 
 <p align="center"><img src="docs/fotos/deteccion_cara_persona.jpg" alt="Cerebro P4 detectando una cara (verde) y una persona (azul) sobre video 1080p" width="49%"> <img src="docs/fotos/auto_encuadre_uvc.jpg" alt="La webcam UVC que sale del P4 con auto-encuadre siguiendo la cara" width="49%"></p>
 
