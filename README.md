@@ -10,10 +10,6 @@ Placa: **Wireless-Tag WT9932P4-TINY** (módulo WT0132P4-A1, ESP32-P4 **revisión
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23135955.svg)](https://doi.org/10.5281/zenodo.23135955) ![estado](https://img.shields.io/badge/estado-probado%20en%20hardware-brightgreen) ![chip](https://img.shields.io/badge/ESP32--P4-v1.0-blue) ![IDF](https://img.shields.io/badge/ESP--IDF-v6.1-red)
 
-<p align="center"><img src="docs/fotos/deteccion_cara_persona.jpg" alt="Cerebro P4 detectando una cara (verde) y una persona (azul) sobre video 1080p" width="49%"> <img src="docs/fotos/auto_encuadre_uvc.jpg" alt="La webcam UVC que sale del P4 con auto-encuadre siguiendo la cara" width="49%"></p>
-
-*Cuadros reales que salen del P4. Izquierda: detección de cara (verde) y persona (azul) en modo Equilibrado. Derecha: la webcam UVC con auto-encuadre siguiendo la cara. Arriba, la barra con fps, CPU, temperatura y datos de internet que el P4 baja por HTTPS él mismo.*
-
 ## Qué hace
 - **Webcam UVC** 1920×1080 en **MJPEG y H.264** (Windows la reconoce sin drivers).
 - **Red USB (NCM)**: el P4 es `192.168.7.1`, con dashboard web, video en vivo y medición de cada acelerador. El PC recibe `192.168.7.2` **sin puerta de enlace**, así que su internet no cambia.
